@@ -19,12 +19,6 @@ public class TreeNode {
         this.data = data;
     }
 
-    public TreeNode() {
-        System.out.println("Enter integer value : ");
-        data = new Scanner(System.in).nextInt();
-        left = right = null;
-    }
-
     public TreeNode getLeft() {
         return left;
     }
