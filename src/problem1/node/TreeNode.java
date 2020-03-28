@@ -8,42 +8,36 @@ package problem1.node;
 
 import java.util.Scanner;
 
-public class TreeNode {
-    private TreeNode left;
-    private TreeNode right;
-    private int data;
+public class TreeNode<E> {
+    private TreeNode<E> left;
+    private TreeNode<E> right;
+    private E data;
 
-    public TreeNode(TreeNode left, TreeNode right, int data) {
-        this.left = left;
-        this.right = right;
+    public TreeNode(E data) {
         this.data = data;
     }
 
-    public TreeNode(int data) {
-        this.data = data;
-    }
-
-    public TreeNode getLeft() {
+    public TreeNode<E> getLeft() {
         return left;
     }
 
-    public void setLeft(TreeNode left) {
+    public void setLeft(TreeNode<E> left) {
         this.left = left;
     }
 
-    public TreeNode getRight() {
+    public TreeNode<E> getRight() {
         return right;
     }
 
-    public void setRight(TreeNode right) {
+    public void setRight(TreeNode<E> right) {
         this.right = right;
     }
 
-    public int getData() {
+    public E getData() {
         return data;
     }
 
-    public void setData(int data) {
+    public void setData(E data) {
         this.data = data;
     }
 }
