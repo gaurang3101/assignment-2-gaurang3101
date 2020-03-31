@@ -6,16 +6,30 @@ import problem1.mybst.MyBinarySearchTree;
 public class MyMain {
     public static void main(String[] args) {
         MyBinarySearchTree binarySearchTree = new MyBinarySearchTree();
-        binarySearchTree.insert(15);
-        binarySearchTree.insert(10);
-        binarySearchTree.insert(50);
-        binarySearchTree.insert(55);
-        binarySearchTree.insert(60);
+        /*for (int i = 0; i < 6; i++) {
+            binarySearchTree.insert((int)(Math.random()*100));
+            //binarySearchTree.insert(i+1);
+        }*/
+        binarySearchTree.insert(83);
+        binarySearchTree.insert(38);
+        binarySearchTree.insert(89);
+        binarySearchTree.insert(23);
+        binarySearchTree.insert(12);
+        binarySearchTree.insert(21);
+        binarySearchTree.insert(11);
+        binarySearchTree.insert(85);
+        binarySearchTree.insert(16);
+        binarySearchTree.insert(17);
+        binarySearchTree.insert(14);
 
-        System.out.println("Left children of the binary search tree: ");
+
+
+        System.out.print("Elements of the binary search tree: ");
         binarySearchTree.traverse();
-        System.out.println("No.of Parents not having their left child are:");
-        System.out.println(binarySearchTree.getCountRight());
+        System.out.print("\nLeft children of the binary search tree: ");
+        binarySearchTree.traverseLeft();
+        System.out.print("\nNo.of Parents not having their left child are: ");
+        System.out.println(binarySearchTree.countLeft(binarySearchTree.getRoot()));
 
     }
 }

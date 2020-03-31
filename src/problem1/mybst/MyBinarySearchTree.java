@@ -5,7 +5,24 @@ import problem1.node.TreeNode;
 // to implement BinarySearchTree
 public class MyBinarySearchTree<E extends Comparable<E>> {
     private TreeNode root;
-    private int countRight;
+    private int levels = 0;
+
+    public int getLevels() {
+        return levels;
+    }
+
+    public void setLevels(int levels) {
+        this.levels = levels;
+    }
+
+    public TreeNode getRoot() {
+        return root;
+    }
+
+    public void setRoot(TreeNode root) {
+        this.root = root;
+    }
+
 
     public void insert(int data) {
         TreeNode node = new TreeNode(data);
@@ -30,64 +47,83 @@ public class MyBinarySearchTree<E extends Comparable<E>> {
         }
     }
 
-    public TreeNode getRoot() {
-        return root;
+    public int countLeft(TreeNode rootNode) {
+        int count = 0;
+        if (rootNode != null) {
+            int countLn = 0;
+            int countL = 0;
+            int countLR = 0;
+            if (rootNode.getLeft() == null) {
+                countLn = count + 1;
+            } else {
+                TreeNode temp = rootNode.getLeft();
+                countL = count + countLeft(temp.getLeft()) +
+                        countLeft(temp.getRight());
+
+            }
+            if (rootNode.getRight() != null) {
+                TreeNode temp2 = rootNode.getRight();
+                countLR = countLeft(temp2.getLeft()) +
+                        countLeft(temp2.getRight());
+            }
+
+            count = countLn + countL + countLR;
+            return count;
+        }
+        return count;
     }
 
-    public void setRoot(TreeNode root) {
-        this.root = root;
-    }
 
-    public void preOrder(TreeNode temp) {
-        if (temp == null) {
-            return;
+
+    int height(TreeNode root) {
+        if (root == null) {
+            return 0;
         } else {
-            System.out.println(temp.getData());
-            preOrder(temp.getLeft());
-            preOrder(temp.getRight());
+            int lHeight = height(root.getLeft());
+            int rHeight = height(root.getRight());
+
+            if (lHeight > rHeight) {
+                return (lHeight + 1);
+            } else {
+                return (rHeight + 1);
+            }
         }
     }
 
-    public void inOrder(TreeNode temp) {
-        if (temp == null) {
+    void printGivenLevel(TreeNode root, int level) {
+        if (root == null)
             return;
-        } else {
-
-            inOrder(temp.getLeft());
-            System.out.println(temp.getData());
-            inOrder(temp.getRight());
+        if (level == 1)
+            System.out.print(root.getData() + " ");
+        else if (level > 1) {
+            printGivenLevel(root.getLeft(), level - 1);
+            printGivenLevel(root.getRight(), level - 1);
         }
     }
 
-    public int getCountRight() {
-        return countRight;
+    void printLeft(TreeNode root, int level) {
+        if (root == null)
+            return;
+        if (level == 1)
+            System.out.print(root.getData() + " ");
+        else if (level > 1) {
+            printGivenLevel(root.getLeft(), level - 1);
+        }
     }
 
-    public void setCountRight(int countRight) {
-        this.countRight = countRight;
+    public void traverseLeft() {
+        setLevels(height(root));
+        for (int i = 2; i <= levels; i++) {
+            printLeft(root, i);
+        }
     }
 
     public void traverse() {
-        TreeNode current = root;
-        TreeNode parent = null;
-        this.countRight = 0;
-        while (current != null) {
-            if (current.getLeft() == null) {
-                countRight++;
-            }
-            if (parent.getData() == current.getData()) {
-
-            }
-            if (parent.getData() < current.getData()) {
-                System.out.println(current.getData());
-                current = current.getLeft();
-            }
-            if (parent.getData() > current.getData()) {
-                current = current.getRight();
-            }
+        setLevels(height(root));
+        for (int i = 1; i <= levels; i++) {
+            printGivenLevel(root, i);
         }
+
+
     }
-
-
 }
-
