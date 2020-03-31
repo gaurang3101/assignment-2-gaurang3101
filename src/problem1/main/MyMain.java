@@ -9,9 +9,6 @@ public class MyMain {
         for (int i = 0; i < 6; i++) {
             binarySearchTree.insert((int)(Math.random()*100));
         }
-
-
-
         System.out.print("Elements of the binary search tree: ");
         binarySearchTree.traverse();
         System.out.print("\nLeft children of the binary search tree: ");
